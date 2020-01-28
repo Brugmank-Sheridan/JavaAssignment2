@@ -15,20 +15,20 @@ package brugmank;
  */
 public class SavingsAccount extends Account {
 
-    public SavingsAccount(String AccountNo, String CustomerName, double Balance, double Withdraw, double Deposit, double Interest, double AnnualRate)
+    public SavingsAccount(String AccountNo, String CustomerName, double Balance,
+            double Withdraw, double Deposit, double Interest)
     {
         super(AccountNo,
                 CustomerName,
                 Balance,
                 Withdraw,
                 Deposit,
-                Interest,
-                AnnualRate);
+                Interest);
     }
     
     public SavingsAccount()
     {
-        super(null, null, 0, 0, 0, 0.02, 0);
+        super(null, null, 0, 0, 0, 0.02);
     }
     
     @Override
@@ -57,6 +57,14 @@ public class SavingsAccount extends Account {
             this.Balance -= withdraw;
         }
         return true;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return AccountNo + "          " + Interest + "        " + Deposit
+                + "         " + Withdraw
+                + "        " + Balance;
     }
 
 }

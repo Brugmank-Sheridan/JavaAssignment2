@@ -21,10 +21,9 @@ public abstract class Account {
     protected double Withdraw;
     protected double Deposit;
     protected double Interest;
-    protected double AnnualRate;
 
     public Account(String AccountNo, String CustomerName, double Balance,
-            double Withdraw, double Deposit, double Interest, double AnnualRate)
+            double Withdraw, double Deposit, double Interest)
     {
         this.AccountNo = "000";
         this.CustomerName = "Unknown";
@@ -32,7 +31,6 @@ public abstract class Account {
         this.Withdraw = Withdraw;
         this.Deposit = Deposit;
         this.Interest = Interest;
-        this.AnnualRate = this.Interest * this.Balance + this.Balance;
     }
 
     public String getAccountNo()
@@ -112,22 +110,18 @@ public abstract class Account {
         this.Interest = Interest;
         return true;
     }
-
-    public double getAnnualRate()
-    {
-        return AnnualRate;
-    }
-
-    public void setAnnualRate(double AnnualRate)
-    {
-        this.AnnualRate = AnnualRate;
-    }
     
     public boolean withdraw(double withdraw)
     {
-        if (withdraw >= this.Balance - 500)
+        if (this.Balance - withdraw >= -500 && withdraw >= 0)
         {
             this.Balance -= withdraw;
+            this.Withdraw = withdraw;
+        }
+        else if (withdraw < 0)
+        {
+            throw new IllegalArgumentException
+            ("Cannot withdraw negative ammount");
         }
         else
         {
@@ -137,6 +131,36 @@ public abstract class Account {
         return true;
     }
     
+    public boolean deposit(double deposit)
+    {
+        if (deposit >= 0)
+        {
+            this.Balance += deposit;
+            this.Deposit = deposit;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Cannont deposit a negative "
+                    + "number");
+        }
+        return true;
+    }
     
+    public boolean addIntrest()
+    {
+        this.Balance += Interest * Balance;
+        Interest = Balance - 1000;
+        return true;
+    }
 
+    @Override
+    public String toString()
+    {
+        String border = 
+                "========================================================";
+        return "\nCustomer: " + CustomerName + "\n" +
+                border 
+                + "\nAccNo.     Interest     Deposit     Withdraw     NewBal.\n"
+                + border;
+    }
 }

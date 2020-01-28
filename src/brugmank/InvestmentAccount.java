@@ -16,21 +16,19 @@ package brugmank;
 public class InvestmentAccount extends SavingsAccount {
 
     public InvestmentAccount(String AccountNo, String CustomerName,
-            double Balance, double Withdraw, double Deposit, double Interest,
-            double AnnualRate)
+        double Balance, double Withdraw, double Deposit, double Interest)
     {
         super(AccountNo,
                 CustomerName,
                 Balance,
                 Withdraw,
                 Deposit,
-                Interest,
-                AnnualRate);
+                Interest);
     }
     
     public  InvestmentAccount()
     {
-        super(null, null, 0, 0, 0, 0.03, 0);
+        super(null, null, 0, 0, 0, 0.03);
     }
     
     @Override
@@ -53,5 +51,26 @@ public class InvestmentAccount extends SavingsAccount {
             this.Balance -= withdraw;
         }
         return true;
+    }
+    
+    /**
+     *
+     * @param deposit
+     * @return
+     */
+    @Override
+    public boolean deposit(double deposit)
+    {
+        this.Balance += deposit * 0.5 + deposit;
+        this.Deposit = deposit;
+        return true;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return AccountNo + "          " + Interest + "        " + Deposit
+                + "         " + Withdraw
+                + "        " + Balance;
     }
 }

@@ -16,21 +16,19 @@ package brugmank;
 public class ChequingAccount extends Account implements Overdraftable {
 
     public ChequingAccount(String AccountNo, String CustomerName,
-            double Balance, double Withdraw, double Deposit, double Interest,
-            double AnnualRate)
+            double Balance, double Withdraw, double Deposit, double Interest)
     {
         super(AccountNo,
                 CustomerName,
                 Balance,
                 Withdraw,
                 Deposit,
-                Interest,
-                AnnualRate);
+                Interest);
     }
     
     public ChequingAccount()
     {
-        super(null, null, 0, 0, 0, 0.01, 0);
+        super(null, null, 0, 0, 0, 0.01);
     }
 
     /**
@@ -56,6 +54,7 @@ public class ChequingAccount extends Account implements Overdraftable {
         if (withdraw <= this.Balance)
         {
             this.Balance -= withdraw;
+            this.Withdraw = withdraw;
         }
         else
         {
@@ -73,7 +72,7 @@ public class ChequingAccount extends Account implements Overdraftable {
     @Override
     public boolean Overdraft(double ammount)
     {
-         if (ammount <= this.Balance + 500)
+         if (this.Balance - ammount >= -500)
          {
              this.Balance -= ammount;
          }
@@ -83,4 +82,15 @@ public class ChequingAccount extends Account implements Overdraftable {
          }
          return true;
     }    
+
+    @Override
+    public String toString()
+    {
+        return AccountNo + "          " + Interest + "        " + Deposit
+                + "         " + Withdraw
+                + "        " + Balance;
+    }
+    
+    
+    
 }

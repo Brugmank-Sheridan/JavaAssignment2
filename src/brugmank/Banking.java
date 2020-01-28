@@ -28,18 +28,15 @@ public class Banking {
         
         newAccount.bankAccount = newAccount.createAccount(input);
         
-        System.out.println(newAccount.chequing.AccountNo);
-        System.out.println(newAccount.savings.AccountNo);
-        System.out.println(newAccount.investing.AccountNo);
-        
-        System.out.println(newAccount.chequing.Balance);
-        System.out.println(newAccount.savings.Balance);
-        System.out.println(newAccount.investing.Balance);
+        System.out.println(newAccount.bankAccount.toString());
+        System.out.println(newAccount.chequing.toString());
+        System.out.println(newAccount.savings.toString());
+        System.out.println(newAccount.investing.toString());
         
         
     }
     
-    private Account bankAccount = new Account(null, null, 0, 0, 0, 0, 0){};
+    private Account bankAccount = new Account(null, null, 0, 0, 0, 0){};
    
     private Account chequing = new ChequingAccount();
     private Account savings = new SavingsAccount();
@@ -49,6 +46,10 @@ public class Banking {
     public Account createAccount (Scanner input)
     {
        boolean valid;
+       
+       chequing.addIntrest();
+       savings.addIntrest();
+       investing.addIntrest();
        
        do
        {
@@ -119,9 +120,36 @@ public class Banking {
            }
        }
        while (!valid);
+       
+       do
+       {
+           System.out.print("Enter deposit ammount: ");
+           var Deposit = input.nextLine();
+           
+           try
+           {
+               var deposit = Double.parseDouble(Deposit);
+               valid = bankAccount.deposit(deposit);
+               
+               chequing.deposit(deposit);
+               savings.deposit(deposit);
+               investing.deposit(deposit);
+               
+           }
+           catch (NumberFormatException e)
+           {
+               System.out.println("Must be a valid number");
+               valid = false;
+           }
+           catch (IllegalArgumentException e)
+           {
+               System.out.println(e.getMessage());
+               valid = false;
+           }
+       }
+       while (!valid);
         
-        
-        return bankAccount;
+       return bankAccount;
     }
     
 }
