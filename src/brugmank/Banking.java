@@ -22,8 +22,8 @@ package brugmank;
 import java.util.Scanner;
 
 /**
- *
- * @author katarn
+ * Create a bank account with three types: chequing, savings, investment.
+ * @author Kyle Brugmans
  */
 public class Banking {
 
@@ -45,18 +45,20 @@ public class Banking {
         
     }
     
+    // Default values for new Accoount object.
     private Account bankAccount = new Account(null, null, 0, 0, 0, 0){};
    
     
+    // Initializing the three main accounts for the user.
     private final Account chequing = new ChequingAccount();
     private final Account savings = new SavingsAccount();
     private final Account investing = new InvestmentAccount();
     
     
     /**
-     * 
-     * @param input
-     * @return bankAccount
+     * Allows the user to input and access their account information.
+     * @param input users input to account.
+     * @return bankAccount data get put into object.
      */
     public Account createAccount (Scanner input)
     {

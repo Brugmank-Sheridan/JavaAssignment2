@@ -1,20 +1,21 @@
 /*
-        [Class name]
-        Author: [the name of the person who created the class. It might be different from yours]
-        Date: [date]
+        Account
+        Author: Kyle Brugmans
+        Date: 2020-1-28
 
         Description
-        [Description about the class]
-    */
-
+        Set's the base parameters for all accounts.
+ */
 package brugmank;
 
 /**
+ * Creates the parameters for all accounts defaults.
  *
- * @author katarn
+ * @author Kyle Brugmans
  */
-public abstract class Account {
-    
+public abstract class Account
+{
+
     protected String AccountNo;
     protected String CustomerName;
     protected double Balance;
@@ -22,15 +23,15 @@ public abstract class Account {
     protected double Deposit;
     protected double Interest;
 
-    
     /**
-     * 
-     * @param AccountNo
-     * @param CustomerName
-     * @param Balance
-     * @param Withdraw
-     * @param Deposit
-     * @param Interest 
+     * Default Values
+     *
+     * @param AccountNo The bank account ID number.
+     * @param CustomerName The bank holders name.
+     * @param Balance Current balance in the account.
+     * @param Withdraw Last withdraw amount made.
+     * @param Deposit Last deposit amount made.
+     * @param Interest Annual percentage for the current balance.
      */
     public Account(String AccountNo, String CustomerName, double Balance,
             double Withdraw, double Deposit, double Interest)
@@ -43,54 +44,46 @@ public abstract class Account {
         this.Interest = Interest;
     }
 
-    /**
-     * 
-     * @return 
-     */
     public String getAccountNo()
     {
         return AccountNo;
     }
 
     /**
-     * 
-     * @param AccountNo
-     * @return 
+     * Sets the bank account ID number.
+     *
+     * @param AccountNo the users input.
+     * @return true if the account number meets prerequisites.
      */
     public boolean setAccountNo(String AccountNo)
     {
-        if (AccountNo.matches("[0-9]{2}"))
+        if (AccountNo.matches("[0-9]{2}")) // Format should be "00".
         {
             this.AccountNo = AccountNo;
-        }
-        else
+        } else
         {
             throw new IllegalArgumentException("Must input 2 digits");
         }
         return true;
     }
 
-    /**
-     * 
-     * @return 
-     */
     public String getCustomerName()
     {
-        return this.CustomerName;
+        return this.CustomerName; // Gets the customers name.
     }
 
     /**
-     * 
-     * @param CustomerName
-     * @return 
+     * Sets the bank holders name to their account.
+     *
+     * @param CustomerName the users name of choice.
+     * @return true if the account name meets prerequisites.
      */
     public boolean setCustomerName(String CustomerName)
     {
-        if (CustomerName.matches("^[a-zA-Z ]*$"))
-        { 
+        if (CustomerName.matches("^[a-zA-Z ]*$")) // Format example "John Apple"
+        {
             this.CustomerName = CustomerName;
-        }
-        else
+        } else
         {
             throw new IllegalArgumentException("Name must not contain number or"
                     + " symbols\n");
@@ -98,84 +91,20 @@ public abstract class Account {
         return true;
     }
 
-    /**
-     * 
-     * @return 
-     */
     public double getBalance()
     {
-        return Balance;
+        return Balance; // Get's the current balance.
     }
 
-    /**
-     * 
-     * @param Balance 
-     */
-    public void setBalance(double Balance)
-    {
-        this.Balance = Balance;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public double getWithdraw()
-    {
-        return Withdraw;
-    }
-
-    /**
-     * 
-     * @param Withdraw 
-     */
-    public void setWithdraw(double Withdraw)
-    {
-        this.Withdraw = Withdraw;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public double getDeposit()
-    {
-        return Deposit;
-    }
-
-    /**
-     * 
-     * @param Deposit 
-     */
-    public void setDeposit(double Deposit)
-    {
-        this.Deposit = Deposit;
-    }
-
-    /**
-     * 
-     * @return 
-     */
     public double getInterest()
     {
-        return Interest;
+        return Interest * 100; // Get's the current interest rate as percentage.
     }
 
     /**
-     * 
-     * @param Interest
-     * @return 
-     */
-    public boolean setInterest(double Interest)
-    {
-        this.Interest = Interest;
-        return true;
-    }
-    
-    /**
-     * 
-     * @param withdraw
-     * @return 
+     * Allows the bank holder to withdraw money from each account.
+     * @param withdraw the amount the user chooses to take.
+     * @return true if the number is valid.
      */
     public boolean withdraw(double withdraw)
     {
@@ -183,24 +112,21 @@ public abstract class Account {
         {
             this.Balance -= withdraw;
             this.Withdraw = withdraw;
-        }
-        else if (withdraw < 0)
+        } else if (withdraw < 0)
         {
-            throw new IllegalArgumentException
-            ("Cannot withdraw negative ammount");
-        }
-        else
+            throw new IllegalArgumentException("Cannot withdraw negative ammount");
+        } else
         {
             throw new IllegalArgumentException("Overdraft limit: $500");
         }
-            
+
         return true;
     }
-    
+
     /**
-     * 
-     * @param deposit
-     * @return 
+     * Allows the bank holder to deposit money from each account.
+     * @param deposit the amount the user chooses to take.
+     * @return true if the number is valid.
      */
     public boolean deposit(double deposit)
     {
@@ -208,47 +134,46 @@ public abstract class Account {
         {
             this.Balance += deposit;
             this.Deposit = deposit;
-        }
-        else
+        } else
         {
             throw new IllegalArgumentException("Cannont deposit a negative "
                     + "number");
         }
         return true;
     }
-    
+
     /**
-     * 
-     * @return 
+     * Set's the annual interest rate to the current balance.
      */
-    public boolean addIntrest()
+    public void addIntrest()
     {
         this.Balance += Interest * Balance;
         Interest = Balance - 1000;
-        return true;
     }
 
     /**
+     * Prints out the account info border.
      * 
-     * @return 
+     * @return the values to the string.
      */
     @Override
     public String toString()
     {
-        String border = 
-                "========================================================";
-        return "\nCustomer: " + CustomerName + "\n" +
-                border 
+        String border
+                = "=================================";
+        return "\nCustomer: " + CustomerName + "\n"
+                + border
                 + "\nAccNo.     Interest     Deposit     Withdraw     NewBal.\n"
                 + border;
     }
-    
+
     /**
+     * Prints out brief account info.
      * 
-     * @return 
+     * @return the values to the string.
      */
     public String accountCreationConfirmation()
     {
-        return "AccNo. " + getAccountNo() +  ": $" + Balance;
+        return "AccNo. " + getAccountNo() + ": $" + Balance;
     }
 }

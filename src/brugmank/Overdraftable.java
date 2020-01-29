@@ -1,17 +1,18 @@
 /*
-        [Class name]
-        Author: [the name of the person who created the class. It might be different from yours]
-        Date: [date]
+        Overdraftable
+        Author: Kyle Brugmans
+        Date: 2020-1-28
 
         Description
-        [Description about the class]
+        Adds overdraft interface.
     */
 
 package brugmank;
 
 /**
- *
- * @author katarn
+ * Creates overdraft for chequing account.
+ * 
+ * @author Kyle Brugmans
  */
 public interface Overdraftable {
 

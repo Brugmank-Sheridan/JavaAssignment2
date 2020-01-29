@@ -1,7 +1,7 @@
 /*
         SavingsAccount
         Author: Kyle Brugmans
-        Date: 2020-1-27
+        Date: 2020-1-28
 
         Description:
         Holds a balance for savings, while applying a yearly rate.
@@ -10,11 +10,22 @@
 package brugmank;
 
 /**
- *
- * @author katarn
+ * Allows user to manage savings account.
+ * 
+ * @author Kyle Brugmans
  */
 public class SavingsAccount extends Account {
 
+    /**
+     * Default values.
+     * 
+     * @param AccountNo The bank account ID number.
+     * @param CustomerName The bank holders name.
+     * @param Balance Current balance in the account.
+     * @param Withdraw Last withdraw amount made.
+     * @param Deposit Last deposit amount made.
+     * @param Interest Annual percentage for the current balance.
+     */
     public SavingsAccount(String AccountNo, String CustomerName, double Balance,
             double Withdraw, double Deposit, double Interest)
     {
@@ -32,9 +43,10 @@ public class SavingsAccount extends Account {
     }
     
     /**
-     *
-     * @param AccountNo
-     * @return
+     * Sets the bank account ID number.
+     * 
+     * @param AccountNo users account number input.
+     * @return true.
      */
     @Override
     public boolean setAccountNo(String AccountNo)
@@ -42,22 +54,12 @@ public class SavingsAccount extends Account {
        this.AccountNo = "2" + AccountNo;
        return true;
     }
-
-    /**
-     *
-     * @param Interest
-     * @return
-     */
-    @Override
-    public boolean setInterest(double Interest)
-    {
-        return super.setInterest(Interest); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /**
-     *
-     * @param withdraw
-     * @return
+     * Withdraws money from savings.
+     * 
+     * @param withdraw amount being taken.
+     * @return true.
      */
     @Override
     public boolean withdraw(double withdraw)
@@ -65,20 +67,21 @@ public class SavingsAccount extends Account {
         if (withdraw <= this.Balance)
         {
             this.Balance -= withdraw;
+            this.Withdraw = withdraw;
         }
         return true;
     }
     
     /**
-     *
-     * @return
+     * Savings account information.
+     * @return the values to string.
      */
     @Override
     public String toString()
     {
-        return AccountNo + "          " + Interest + "        " + Deposit
-                + "         " + Withdraw
-                + "        " + Balance;
+        return AccountNo + "          $" + Interest + "        $" + Deposit
+                + "         $" + Withdraw
+                + "        $" + Balance;
     }
 
 }

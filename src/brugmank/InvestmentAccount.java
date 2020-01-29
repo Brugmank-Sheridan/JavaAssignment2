@@ -1,20 +1,31 @@
 /*
-        [Class name]
-        Author: [the name of the person who created the class. It might be different from yours]
-        Date: [date]
+        InvestmentAccount
+        Author: Kyle Brugmans
+        Date: 2020-1-28
 
         Description
-        [Description about the class]
+         Holds the information for the users investment account.
     */
 
 package brugmank;
 
 /**
- *
- * @author katarn
+ * Allows user to manage their investments account.
+ * 
+ * @author Kyle Brugmans
  */
 public class InvestmentAccount extends SavingsAccount {
 
+    /**
+     * Default values.
+     * 
+     * @param AccountNo The bank account ID number.
+     * @param CustomerName The bank holders name.
+     * @param Balance Current balance in the account.
+     * @param Withdraw Last withdraw amount made.
+     * @param Deposit Last deposit amount made.
+     * @param Interest Annual percentage for the current balance.
+     */
     public InvestmentAccount(String AccountNo, String CustomerName,
         double Balance, double Withdraw, double Deposit, double Interest)
     {
@@ -32,9 +43,10 @@ public class InvestmentAccount extends SavingsAccount {
     }
     
     /**
-     *
-     * @param AccountNo
-     * @return
+     * Sets the bank account ID number.
+     * 
+     * @param AccountNo users account number input.
+     * @return true.
      */
     @Override
     public boolean setAccountNo(String AccountNo)
@@ -44,9 +56,10 @@ public class InvestmentAccount extends SavingsAccount {
     }
     
     /**
-     *
-     * @param withdraw
-     * @return
+     * Withdraw money out of the investing.
+     * 
+     * @param withdraw amount being taken out.
+     * @return true.
      */
     @Override
     public boolean withdraw(double withdraw)
@@ -54,14 +67,16 @@ public class InvestmentAccount extends SavingsAccount {
         if (withdraw <= this.Balance)
         {
             this.Balance -= withdraw;
+            this.Withdraw = withdraw;
         }
         return true;
     }
     
     /**
-     *
-     * @param deposit
-     * @return
+     * Deposits money into investing times 50%.
+     * 
+     * @param deposit amount being deposited
+     * @return true.
      */
     @Override
     public boolean deposit(double deposit)
@@ -72,14 +87,14 @@ public class InvestmentAccount extends SavingsAccount {
     }
     
     /**
-     *
-     * @return
+     * Investing account information.
+     * @return the values to string.
      */
     @Override
-    public String toString()
+    public String toString() 
     {
-        return AccountNo + "          " + Interest + "        " + Deposit
-                + "         " + Withdraw
-                + "        " + Balance;
+        return AccountNo + "          $" + Interest + "        $" + Deposit
+                + "         $" + Withdraw
+                + "        $" + Balance;
     }
 }

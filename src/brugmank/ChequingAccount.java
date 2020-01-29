@@ -1,28 +1,30 @@
 /*
-        [Class name]
-        Author: [the name of the person who created the class. It might be different from yours]
-        Date: [date]
+        ChequingAccount
+        Author: Kyle Brugmans
+        Date: 2020-1-28
 
         Description
-        [Description about the class]
+        Holds the information for the users chequing account.
     */
 
 package brugmank;
 
 /**
- *
- * @author katarn
+ * Allows user to manage chequing account.
+ * 
+ * @author Kyle Brugmans
  */
 public class ChequingAccount extends Account implements Overdraftable {
 
     /**
+     * Default values.
      * 
-     * @param AccountNo
-     * @param CustomerName
-     * @param Balance
-     * @param Withdraw
-     * @param Deposit
-     * @param Interest 
+     * @param AccountNo The bank account ID number.
+     * @param CustomerName The bank holders name.
+     * @param Balance Current balance in the account.
+     * @param Withdraw Last withdraw amount made.
+     * @param Deposit Last deposit amount made.
+     * @param Interest Annual percentage for the current balance.
      */
     public ChequingAccount(String AccountNo, String CustomerName,
             double Balance, double Withdraw, double Deposit, double Interest)
@@ -37,13 +39,14 @@ public class ChequingAccount extends Account implements Overdraftable {
     
     public ChequingAccount()
     {
-        super(null, null, 0, 0, 0, 0.01);
+        super(null, null, 0, 0, 0, 0.01); // Sets values to default configuration.
     }
 
     /**
-     *
-     * @param AccountNo
-     * @return
+     * Adds account number profile.
+     * 
+     * @param AccountNo users account number input.
+     * @return true.
      */
     @Override
     public boolean setAccountNo(String AccountNo)
@@ -53,9 +56,10 @@ public class ChequingAccount extends Account implements Overdraftable {
     }
     
     /**
-     *
-     * @param withdraw
-     * @return
+     * Allows user to take money out of their chequing account.
+     * 
+     * @param withdraw users input withdraw amount.
+     * @return true.
      */
     @Override
     public boolean withdraw(double withdraw)
@@ -72,18 +76,19 @@ public class ChequingAccount extends Account implements Overdraftable {
         return true;
     }
     
-    
     /**
-     *
-     * @param ammount
-     * @return 
+     * Allows withdraw to force balance as low as $500.
+     * 
+     * @param withdraw users input withdraw amount.
+     * @return true.
      */
     @Override
-    public boolean Overdraft(double ammount)
+    public boolean Overdraft(double withdraw)
     {
-         if (this.Balance - ammount >= -500)
+         if (this.Balance - withdraw >= -500)
          {
-             this.Balance -= ammount;
+             this.Balance -= withdraw;
+             this.Withdraw = withdraw;
          }
          else
          {
@@ -93,15 +98,15 @@ public class ChequingAccount extends Account implements Overdraftable {
     }    
 
     /**
-     * 
-     * @return 
+     * Chequing account information.
+     * @return the values to string.
      */
     @Override
     public String toString()
     {
-        return AccountNo + "          " + Interest + "        " + Deposit
-                + "         " + Withdraw
-                + "        " + Balance;
+        return AccountNo + "          $" + Interest + "        $" + Deposit
+                + "         $" + Withdraw
+                + "        $" + Balance;
     }
     
     
