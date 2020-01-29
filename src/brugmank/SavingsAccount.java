@@ -1,10 +1,10 @@
 /*
-        [Class name]
-        Author: [the name of the person who created the class. It might be different from yours]
-        Date: [date]
+        SavingsAccount
+        Author: Kyle Brugmans
+        Date: 2020-1-27
 
-        Description
-        [Description about the class]
+        Description:
+        Holds a balance for savings, while applying a yearly rate.
     */
 
 package brugmank;
@@ -31,6 +31,11 @@ public class SavingsAccount extends Account {
         super(null, null, 0, 0, 0, 0.02);
     }
     
+    /**
+     *
+     * @param AccountNo
+     * @return
+     */
     @Override
     public boolean setAccountNo(String AccountNo)
     {
@@ -38,6 +43,11 @@ public class SavingsAccount extends Account {
        return true;
     }
 
+    /**
+     *
+     * @param Interest
+     * @return
+     */
     @Override
     public boolean setInterest(double Interest)
     {
@@ -59,6 +69,10 @@ public class SavingsAccount extends Account {
         return true;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString()
     {

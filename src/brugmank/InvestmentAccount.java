@@ -31,6 +31,11 @@ public class InvestmentAccount extends SavingsAccount {
         super(null, null, 0, 0, 0, 0.03);
     }
     
+    /**
+     *
+     * @param AccountNo
+     * @return
+     */
     @Override
     public boolean setAccountNo(String AccountNo)
     {
@@ -66,6 +71,10 @@ public class InvestmentAccount extends SavingsAccount {
         return true;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString()
     {

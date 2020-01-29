@@ -22,6 +22,16 @@ public abstract class Account {
     protected double Deposit;
     protected double Interest;
 
+    
+    /**
+     * 
+     * @param AccountNo
+     * @param CustomerName
+     * @param Balance
+     * @param Withdraw
+     * @param Deposit
+     * @param Interest 
+     */
     public Account(String AccountNo, String CustomerName, double Balance,
             double Withdraw, double Deposit, double Interest)
     {
@@ -33,11 +43,20 @@ public abstract class Account {
         this.Interest = Interest;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getAccountNo()
     {
         return AccountNo;
     }
 
+    /**
+     * 
+     * @param AccountNo
+     * @return 
+     */
     public boolean setAccountNo(String AccountNo)
     {
         if (AccountNo.matches("[0-9]{2}"))
@@ -51,11 +70,20 @@ public abstract class Account {
         return true;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getCustomerName()
     {
         return this.CustomerName;
     }
 
+    /**
+     * 
+     * @param CustomerName
+     * @return 
+     */
     public boolean setCustomerName(String CustomerName)
     {
         if (CustomerName.matches("^[a-zA-Z ]*$"))
@@ -70,47 +98,85 @@ public abstract class Account {
         return true;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public double getBalance()
     {
         return Balance;
     }
 
+    /**
+     * 
+     * @param Balance 
+     */
     public void setBalance(double Balance)
     {
         this.Balance = Balance;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public double getWithdraw()
     {
         return Withdraw;
     }
 
+    /**
+     * 
+     * @param Withdraw 
+     */
     public void setWithdraw(double Withdraw)
     {
         this.Withdraw = Withdraw;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public double getDeposit()
     {
         return Deposit;
     }
 
+    /**
+     * 
+     * @param Deposit 
+     */
     public void setDeposit(double Deposit)
     {
         this.Deposit = Deposit;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public double getInterest()
     {
         return Interest;
     }
 
+    /**
+     * 
+     * @param Interest
+     * @return 
+     */
     public boolean setInterest(double Interest)
     {
         this.Interest = Interest;
         return true;
     }
     
+    /**
+     * 
+     * @param withdraw
+     * @return 
+     */
     public boolean withdraw(double withdraw)
     {
         if (this.Balance - withdraw >= -500 && withdraw >= 0)
@@ -131,6 +197,11 @@ public abstract class Account {
         return true;
     }
     
+    /**
+     * 
+     * @param deposit
+     * @return 
+     */
     public boolean deposit(double deposit)
     {
         if (deposit >= 0)
@@ -146,6 +217,10 @@ public abstract class Account {
         return true;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public boolean addIntrest()
     {
         this.Balance += Interest * Balance;
@@ -153,6 +228,10 @@ public abstract class Account {
         return true;
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String toString()
     {
@@ -162,5 +241,14 @@ public abstract class Account {
                 border 
                 + "\nAccNo.     Interest     Deposit     Withdraw     NewBal.\n"
                 + border;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String accountCreationConfirmation()
+    {
+        return "AccNo. " + getAccountNo() +  ": $" + Balance;
     }
 }

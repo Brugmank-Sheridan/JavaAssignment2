@@ -15,6 +15,15 @@ package brugmank;
  */
 public class ChequingAccount extends Account implements Overdraftable {
 
+    /**
+     * 
+     * @param AccountNo
+     * @param CustomerName
+     * @param Balance
+     * @param Withdraw
+     * @param Deposit
+     * @param Interest 
+     */
     public ChequingAccount(String AccountNo, String CustomerName,
             double Balance, double Withdraw, double Deposit, double Interest)
     {
@@ -83,6 +92,10 @@ public class ChequingAccount extends Account implements Overdraftable {
          return true;
     }    
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String toString()
     {

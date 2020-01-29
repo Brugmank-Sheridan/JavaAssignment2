@@ -1,11 +1,20 @@
 /*
-        Name:  [your name here]
-        Assignment:  [assignment name]
-        Program: [your program name here]
-        Date:  [assignment due date here]
+        Name:  Kyle Brugmans
+        Assignment:  Assignment 02
+        Program: Banking
+        Date:  2020-01-29
     
         Description:
-        [program description in your own words]
+        The Banking program prompts the user to create a bank acccount giving
+        them a chequing (with overdraft), savings, and investing account which
+        the user can deposit and withdraw from.
+        
+        The program gives an annual interest rate per account and 50 cents
+        for each dollar deposited into investment.
+        
+        Finally displaying account information for the account holder.
+
+        
     */
 
 package brugmank;
@@ -38,18 +47,20 @@ public class Banking {
     
     private Account bankAccount = new Account(null, null, 0, 0, 0, 0){};
    
-    private Account chequing = new ChequingAccount();
-    private Account savings = new SavingsAccount();
-    private Account investing = new InvestmentAccount();
+    
+    private final Account chequing = new ChequingAccount();
+    private final Account savings = new SavingsAccount();
+    private final Account investing = new InvestmentAccount();
     
     
+    /**
+     * 
+     * @param input
+     * @return bankAccount
+     */
     public Account createAccount (Scanner input)
     {
        boolean valid;
-       
-       chequing.addIntrest();
-       savings.addIntrest();
-       investing.addIntrest();
        
        do
        {
@@ -92,6 +103,14 @@ public class Banking {
            }
        }
        while (!valid);
+       
+       System.out.println(chequing.accountCreationConfirmation());
+       System.out.println(savings.accountCreationConfirmation());
+       System.out.println(investing.accountCreationConfirmation());
+       
+       chequing.addIntrest();
+       savings.addIntrest();
+       investing.addIntrest();
        
        do
        {
